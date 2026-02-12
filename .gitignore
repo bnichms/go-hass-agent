@@ -39,6 +39,7 @@ web/content/*.css.map
 !.vscode/launch.json
 !.devcontainer/*
 .devcontainer/.env
+!.devcontainer/.env.example
 .devcontainer/data/**
 !.devcontainer/data/mosquitto/mosquitto.conf.example
 !LICENSE

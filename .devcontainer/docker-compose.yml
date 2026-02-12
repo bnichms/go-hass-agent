@@ -4,7 +4,8 @@ services:
   devcontainer:
     hostname: devcontainer
     env_file:
-      - .env
+      - path: .env
+        required: false
     devices:
       - /dev/dri
     environment:
@@ -13,7 +14,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        - GO_VERSION=$GO_VERSION
+        - GO_VERSION=${GO_VERSION:-1.25.6}
     volumes:
       - ..:/workspace:cached
       - /etc/localtime:/etc/localtime:ro,cached
@@ -25,7 +26,7 @@ services:
       - seccomp:unconfined
       - label:disable
     ports:
-      - $GOHASSAGENT_server_port:8223
+      - ${GOHASSAGENT_server_port:-8223}:8223
     command: -c 'dbus-launch sleep infinity'
 
   home-assistant:
@@ -35,8 +36,9 @@ services:
       - NET_ADMIN
       - NET_RAW
     env_file:
-      - .env
-    image: ghcr.io/home-assistant/home-assistant:$HA_VERSION
+      - path: .env
+        required: false
+    image: ghcr.io/home-assistant/home-assistant:${HA_VERSION:-stable}
     volumes:
       - ./data/home-assistant/config:/config
       - /run/dbus:/run/dbus:ro
@@ -46,8 +48,9 @@ services:
   mosquitto:
     hostname: mosquitto
     env_file:
-      - .env
-    image: docker.io/eclipse-mosquitto:$MOSQUITTO_VERSION
+      - path: .env
+        required: false
+    image: docker.io/eclipse-mosquitto:${MOSQUITTO_VERSION:-2}
     volumes:
       - ./data/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
       - mosquitto_data:/mosquitto/data

@@ -24,6 +24,7 @@
     }
   },
   "dockerComposeFile": "docker-compose.yml",
+  "initializeCommand": "cd .devcontainer && [ -d data/mosquitto/mosquitto.conf ] && rm -rf data/mosquitto/mosquitto.conf; cp -n .env.example .env 2>/dev/null; cp -n data/mosquitto/mosquitto.conf.example data/mosquitto/mosquitto.conf 2>/dev/null; true",
   "name": "Go Hass Agent Development",
   "postCreateCommand": "bash .devcontainer/postcreate.sh",
   "service": "devcontainer",

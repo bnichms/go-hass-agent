@@ -1174,7 +1174,9 @@ some assets required for the web UI. It's recommended to use
 > [!NOTE]
 >
 > The devcontainer has all the necessary tooling installed for building Go Hass
-> Agent.
+> Agent. A default `.devcontainer/.env` will be created automatically from
+> `.devcontainer/.env.example` on first run. Edit `.devcontainer/.env` to
+> customise the devcontainer environment.
 >
 > Some architectures are not supported by bun. In these cases, it's fine to use
 > [npm](https://www.npmjs.com/) as well, which has much wider architecture
